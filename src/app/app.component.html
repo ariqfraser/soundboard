@@ -1,1 +1,12 @@
-<h1>hello</h1>
+<div class="layout">
+    <div class="header">
+        <p class="text-subheading">Soundboard mixer</p>
+        <h1 class="text-heading">Untitled Preset</h1>
+        <app-button icon="settings">Settings</app-button>
+    </div>
+
+    <app-directory></app-directory>
+
+    <h1>{{ test() }}</h1>
+    <app-button (click)="testSet('it works')">test</app-button>
+</div>

@@ -1,0 +1,22 @@
+{
+    "appId": "com.ariqfraser.sound",
+    "asar": true,
+    "directories": {
+        "output": "release/"
+    },
+    "files": [
+        "**/*",
+        "!**/*.ts",
+        "!*.map",
+        "!package.json",
+        "!package-lock.json",
+        {
+            "from": "dist/standalone-v1/browser",
+            "filter": ["**/*"]
+        }
+    ],
+    "win": {
+        "icon": "dist/standalone-v1/browser/favicon.512x512.png",
+        "target": ["zip", "squirrel"]
+    }
+}

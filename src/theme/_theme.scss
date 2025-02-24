@@ -26,8 +26,37 @@ $clr-surface-tonal-a30: #66605b;
 $clr-surface-tonal-a40: #7e7874;
 $clr-surface-tonal-a50: #96918e;
 
-/** Examples */
-.bg-primary {
+/** Text */
+$clr-text-dark: $clr-dark-a0;
+$clr-text: $clr-light-a0;
+
+/** Size */
+$s: 0.5rem;
+$s1: 1rem;
+$s2: 1.5rem;
+
+$p: $s;
+$p1: calc($p * 2);
+
+$r: $s;
+
+$fs: 1rem;
+$fs1: calc($fs * 1.2);
+$fs2: calc($fs * 2);
+
+@mixin Heading($size) {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: $size;
+}
+
+/** Classes */
+.text-subheading {
+    @include Heading($fs1);
     color: $clr-primary-a50;
-    background-color: $clr-surface-a0;
+}
+
+.text-heading {
+    @include Heading($fs2);
+    color: $clr-light-a0;
 }

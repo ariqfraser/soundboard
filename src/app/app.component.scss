@@ -1,8 +1,17 @@
 @use "theme" as *;
 
 :host {
-    background-color: $clr-dark-a0;
+    background-color: $clr-surface-a0;
+    color: $clr-text;
     width: 100vw;
     height: 100vh;
     display: block;
+}
+
+.layout {
+    width: 95%;
+    height: inherit;
+    margin-inline: auto;
+    overflow: hidden;
+    padding: $p1 0;
 }

@@ -1,0 +1,18 @@
+@use "theme" as *;
+
+button {
+    background-color: $clr-primary-a20;
+    color: $clr-dark-a0;
+    padding: $p $p1;
+    border-radius: $r;
+    border: none;
+    cursor: pointer;
+    font-size: $fs1;
+    display: flex;
+    gap: $s;
+    align-items: center;
+}
+
+mat-icon {
+    color: $clr-text-dark;
+}
