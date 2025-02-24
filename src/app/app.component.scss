@@ -1,0 +1,8 @@
+@use "theme" as *;
+
+:host {
+    background-color: $clr-dark-a0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+}
