@@ -1,0 +1,17 @@
+<div class="header">
+    <p class="text-subheading">Audio Queue</p>
+    <h1 class="text-heading">Untitled Preset</h1>
+</div>
+
+Track: {{ trackInfo() | json }} <br />
+
+<div class="action-container">
+    <app-icon-button (click)="onPlayButtonClick()">{{
+        trackInfo().isPaused ? "play_arrow" : "pause"
+    }}</app-icon-button>
+    <app-seeker
+        [max]="trackInfo().duration"
+        [progress]="trackInfo().currentTime"
+        (seekEvent)="seek($event)"></app-seeker>
+    <app-volume-button (changeEvent)="setVolume($event)"></app-volume-button>
+</div>

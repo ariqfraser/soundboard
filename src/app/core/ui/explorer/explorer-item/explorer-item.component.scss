@@ -1,0 +1,21 @@
+@use "theme" as *;
+
+:host {
+    display: flex;
+    flex-direction: column;
+}
+button {
+    max-width: max-content;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: $clr-text;
+    padding: calc($p / 2) 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+app-explorer-item {
+    margin-left: $p2;
+}

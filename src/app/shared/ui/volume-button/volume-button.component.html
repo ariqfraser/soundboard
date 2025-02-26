@@ -1,0 +1,25 @@
+<button (click)="isOpen = !isOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+    <app-icon>
+        {{ volume() > 50 ? "volume_up" : volume() > 0 ? "volume_down" : "volume_mute" }}
+    </app-icon>
+</button>
+
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen"
+    cdkConnectedOverlayHasBackdrop="true"
+    cdkConnectedOverlayBackdropClass="overlay-backdrop"
+    [cdkConnectedOverlayPositions]="overplayPositions"
+    (backdropClick)="isOpen = false"
+    (detach)="isOpen = false">
+    <div
+        class="control"
+        (mousedown)="startDrag($event)"
+        (mouseup)="stopDrag()"
+        (mousemove)="setVol($event)">
+        <app-icon>add</app-icon>
+        <div class="level" [style.height]="volume() + '%'"></div>
+        <app-icon>remove</app-icon>
+    </div>
+</ng-template>

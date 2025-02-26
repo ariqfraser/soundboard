@@ -1,7 +1,6 @@
 @use "theme" as *;
 
 :host {
-    background-color: $clr-surface-a0;
     color: $clr-text;
     width: 100vw;
     height: 100vh;
@@ -9,9 +8,63 @@
 }
 
 .layout {
-    width: 95%;
-    height: inherit;
+    height: calc(100vh - 2rem - $p);
     margin-inline: auto;
     overflow: hidden;
-    padding: $p1 0;
+    display: flex;
+    border-radius: $r;
+
+    app-nav {
+        margin-right: $p;
+    }
+
+    .explorer-wrapper {
+        background-color: $clr-surface-a0;
+        height: 100%;
+        max-width: 25vw;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-right: $p1;
+        border-top-left-radius: $r;
+        border-bottom-left-radius: $r;
+        padding: $p1;
+        border: 1px solid $clr-surface-a20;
+    }
+
+    main {
+        flex-grow: 1;
+        background-color: $clr-surface-a0;
+        border-top-right-radius: $r;
+        border-bottom-right-radius: $r;
+        padding: $p1;
+        border: 1px solid $clr-surface-a20;
+        border-left: none;
+    }
+}
+
+.titlebar-wrapper {
+    display: flex;
+    gap: $p;
+    margin-bottom: $p;
+
+    .titlebar {
+        height: 2rem;
+        background-color: $clr-surface-a10;
+        border-radius: $r;
+        user-select: none;
+        flex-grow: 1;
+        cursor: grab;
+        app-region: drag;
+    }
+
+    button {
+        background-color: rgb(214, 54, 54);
+        border-radius: $r;
+        width: 2rem;
+        aspect-ratio: 1/1;
+        border: none;
+        cursor: pointer;
+        display: grid;
+        place-content: center;
+    }
 }

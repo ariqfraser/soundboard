@@ -1,0 +1,7 @@
+<span>{{ progress() | secondsToTime }}</span>
+<div class="clickable-area" (click)="seek($event)">
+    <div class="line">
+        <div class="progress" [style.width]="progressPercentage()"></div>
+    </div>
+</div>
+<span>{{ max() | secondsToTime }}</span>

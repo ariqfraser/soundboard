@@ -1,0 +1,44 @@
+<h1 class="text-subheading">downloader</h1>
+<p class="text-heading">setup</p>
+
+<div class="settings container">
+    <span class="step">
+        1. Download yt-dlp and place it in the same folder as your sources root.</span
+    >
+    <app-button>Auto setup</app-button>
+    <app-button>Goto yt-dlp Github</app-button>
+    <span class="step"
+        >2. Enter your youtube api key (optional). Used for the search feature / playlist
+        download</span
+    >
+    <label for="">YoutubeAPI Key</label>
+    <input type="password" />
+</div>
+
+<p class="text-heading">Search</p>
+
+<div class="container flex">
+    <label for="">Enter a video URL</label>
+    <input #inputURL type="text" (keyup)="onURLChange(inputURL.value)" />
+</div>
+
+<div class="result-wrapper">
+    @if (!this.videoID()) {
+        <div class="video video-placeholder">
+            <app-icon>movie</app-icon>
+        </div>
+    } @else {
+        <iframe
+            class="video"
+            [src]="embedSrc()"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+    }
+
+    <button class="button" [disabled]="!videoID()" (click)="download()">
+        <app-icon>download</app-icon>
+    </button>
+</div>

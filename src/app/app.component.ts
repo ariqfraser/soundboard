@@ -1,24 +1,19 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { ButtonComponent } from './shared/ui/button/button.component';
-import { AudioPlayerService } from './services/audio-player/audio-player.service';
-import { DirectoryComponent } from './shared/ui/directory/directory.component';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { ExplorerComponent } from './core/ui/explorer/explorer.component';
+import { MatIcon } from '@angular/material/icon';
+import { NavComponent } from './core/ui/nav/nav.component';
+import { IconComponent } from './shared/ui/icon/icon.component';
 
 @Component({
     selector: 'app-root',
-    imports: [ButtonComponent, DirectoryComponent],
+    imports: [ExplorerComponent, RouterOutlet, NavComponent, IconComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
-    private readonly ap = inject(AudioPlayerService);
-
-    test = signal(window.localStorage.getItem('test') ?? 'NONE SET');
-    ngOnInit(): void {
-        this.ap.play();
-    }
-    open() {}
-
-    testSet(x: string) {
-        window.localStorage.setItem('test', x);
+export class AppComponent {
+    closeApp() {
+        console.log('closing');
+        window.electronAPI.close();
     }
 }

@@ -1,0 +1,56 @@
+@use "theme" as *;
+
+button {
+    display: grid;
+    place-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    color: $clr-light-a0;
+
+    app-icon {
+        --size: 2rem;
+        --wght: 300;
+    }
+}
+
+.control {
+    border-radius: $r;
+    background-color: $clr-surface-a10;
+    height: 12rem;
+    width: 3rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+    cursor: pointer;
+    margin: $p;
+    user-select: none;
+
+    .level {
+        pointer-events: none;
+        width: inherit;
+        background-color: $clr-surface-a50;
+    }
+
+    app-icon {
+        pointer-events: none;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: $clr-light-a0;
+        $margin: 8px;
+
+        &:first-of-type {
+            top: $margin;
+        }
+        &:last-of-type {
+            bottom: $margin;
+        }
+    }
+}
+
+.overlay-backdrop {
+    background-color: transparent;
+}

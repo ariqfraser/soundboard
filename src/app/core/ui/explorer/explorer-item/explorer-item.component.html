@@ -1,0 +1,9 @@
+<button (click)="itemClick()" [title]="item().path">
+    {{ item().isDir ? "📁" : "📄" }} {{ item().name }}
+</button>
+
+@if (item().isDir && item().isOpen) {
+    @for (child of item().children; track child.name) {
+        <app-explorer-item [item]="child"></app-explorer-item>
+    }
+}

@@ -1,0 +1,19 @@
+@use "material-symbols" as *;
+
+:host {
+    --size: 1.5rem;
+    --color: white;
+    --wght: 200;
+    height: min-content;
+    width: min-content;
+    width: var(--size);
+    height: var(--size);
+}
+
+mat-icon {
+    font-variation-settings: "wght" var(--wght);
+    font-size: var(--size) !important;
+    width: var(--size);
+    height: var(--size);
+    color: var(--color);
+}

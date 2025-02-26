@@ -1,0 +1,15 @@
+@use "theme" as *;
+.action-container {
+    display: flex;
+    height: 5rem;
+    gap: $p1;
+    align-items: center;
+    padding: 0 $p2;
+
+    background-color: $clr-surface-a30;
+    border-radius: $r;
+
+    app-seeker {
+        width: 50%;
+    }
+}

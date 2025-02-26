@@ -1,0 +1,75 @@
+@use "theme" as *;
+
+.settings {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: center;
+    gap: $p1;
+
+    .step {
+        grid-column: span 2;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+}
+
+input {
+    border-radius: $r;
+    background-color: $clr-surface-a0;
+    border: none;
+    padding: $p $p;
+    font-size: $s1;
+    color: $clr-text;
+    flex-grow: 1;
+}
+
+.container {
+    padding: $p1;
+    background-color: $clr-surface-a10;
+    border-radius: $r;
+
+    &.flex {
+        display: flex;
+        gap: $p1;
+        align-items: center;
+    }
+}
+
+.video {
+    width: 500px;
+    aspect-ratio: 16/9;
+    border-radius: $r;
+}
+
+.video-placeholder {
+    background-color: $clr-surface-a20;
+    display: grid;
+    place-content: center;
+    app-icon {
+        --size: 5rem;
+    }
+}
+
+.result-wrapper {
+    margin-top: $p1;
+    display: flex;
+    gap: $p;
+}
+
+.button {
+    background-color: $clr-primary-a20;
+    border: none;
+    border-radius: $r;
+    padding: $p $p1;
+    cursor: pointer;
+
+    &:disabled {
+        background-color: $clr-surface-a50;
+        cursor: not-allowed;
+    }
+
+    app-icon {
+        --size: 2rem;
+        --wght: 500;
+    }
+}

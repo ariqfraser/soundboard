@@ -1,12 +1,13 @@
+<div class="titlebar-wrapper">
+    <div class="titlebar"></div>
+    <button (click)="closeApp()"><app-icon>close</app-icon></button>
+</div>
 <div class="layout">
-    <div class="header">
-        <p class="text-subheading">Soundboard mixer</p>
-        <h1 class="text-heading">Untitled Preset</h1>
-        <app-button icon="settings">Settings</app-button>
+    <app-nav></app-nav>
+    <div class="explorer-wrapper">
+        <app-explorer></app-explorer>
     </div>
-
-    <app-directory></app-directory>
-
-    <h1>{{ test() }}</h1>
-    <app-button (click)="testSet('it works')">test</app-button>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
 </div>

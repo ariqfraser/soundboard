@@ -1,0 +1,24 @@
+@use "material-symbols" as *;
+@use "theme" as *;
+
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: $p1;
+    background-color: $clr-surface-a10;
+    border-radius: $r;
+    padding: $p1;
+}
+
+app-icon {
+    --size: 2.5rem;
+    cursor: pointer;
+
+    &.active {
+        --color: #ed9b4e;
+    }
+}
+
+.settings {
+    margin-top: auto;
+}

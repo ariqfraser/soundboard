@@ -1,0 +1,5 @@
+<div class="container">
+    @for (item of directory(); track item.name) {
+        <app-explorer-item [item]="item"></app-explorer-item>
+    }
+</div>

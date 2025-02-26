@@ -1,0 +1,33 @@
+@use "theme" as *;
+
+:host {
+    --h: 3.5rem;
+}
+
+button {
+    border-radius: 20rem;
+    border: none;
+    cursor: pointer;
+    width: var(--h);
+    height: var(--h);
+    display: grid;
+    place-content: center;
+    transition: transform 100ms ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &.primary {
+        background-color: $clr-primary-a20;
+        app-icon {
+            --color: $clr-dark-a0;
+            --size: 2.5rem;
+            --wght: 500;
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@use "theme" as *;
+
+:host {
+    display: flex;
+    gap: $p1;
+    align-items: center;
+}
+
+.clickable-area {
+    padding: $p 0;
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.line {
+    width: 100%;
+    height: 5px;
+    border-radius: 1rem; // rounded cap
+    background-color: $clr-surface-a40;
+    position: relative;
+    pointer-events: none;
+
+    .progress {
+        pointer-events: inherit;
+        position: absolute;
+        border-radius: inherit;
+        height: inherit;
+        background-color: $clr-light-a0;
+        transform: background-color 100ms ease-in-out;
+    }
+}
