@@ -25,10 +25,10 @@ export class ElectronApiService {
             window.electronAPI.onDownloadStarted((data) => {
                 console.log('download-started', data);
                 this._downloadStarted$.next(data);
-                this.notification.add(
-                    'Download Started!' + data.videoID,
-                    '',
-                    'click for more info',
+                this.notification.show(
+                    'Download Started!',
+                    `Download for [${data.videoID}] has started.`,
+                    'warning',
                 );
             });
 
@@ -46,7 +46,7 @@ export class ElectronApiService {
 
     get isElectron(): boolean {
         try {
-            return window.electronAPI.heartbeat();
+            return window.electronAPI?.heartbeat();
         } catch (e) {
             console.error(e);
             return false;

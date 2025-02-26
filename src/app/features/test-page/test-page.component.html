@@ -1,0 +1,22 @@
+<h1 class="text-subheading">Test Page</h1>
+<div class="section">
+    <p class="section-title">Notifications</p>
+
+    <div class="grid notifications">
+        <label for="notifTitle">title</label><label for="notifText">text</label>
+        <input id="notifTitle" type="text" value="Download started!" #notifTitle />
+        <input id="notifText" type="text" value="Download for [videoID] started." #notifText />
+    </div>
+
+    <div class="row">
+        <button (click)="showNotification(notifTitle.value, notifText.value, 'success')">
+            <app-icon>verified</app-icon>success
+        </button>
+        <button (click)="showNotification(notifTitle.value, notifText.value, 'warning')">
+            <app-icon>warning</app-icon>warning
+        </button>
+        <button (click)="showNotification(notifTitle.value, notifText.value, 'error')">
+            <app-icon>report</app-icon>error
+        </button>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { AudioQueueComponent } from './features/audio-queue/audio-queue.componen
 import { AudioMixerComponent } from './features/audio-mixer/audio-mixer.component';
 import { DownloaderComponent } from './features/downloader/downloader.component';
 import { SettingsComponent } from './features/settings/settings.component';
+import { TestPageComponent } from './features/test-page/test-page.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
         path: 'settings',
         component: SettingsComponent,
+    },
+    {
+        path: 'test',
+        component: TestPageComponent,
     },
 ];

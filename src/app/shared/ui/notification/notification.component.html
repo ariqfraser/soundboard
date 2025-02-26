@@ -1,9 +1,9 @@
 <div class="container" [@slideInOut]="animationState" (@slideInOut.done)="onAnimationDone($event)">
-    <p class="title">{{ title }}</p>
-    @if (text) {
-        <p class="text">{{ text }}</p>
-    }
-    @if (actionText) {
-        <p class="action">{{ actionText }}</p>
-    }
+    <div class="status" [class]="status"></div>
+    <div class="info">
+        <p class="title">{{ title }}</p>
+        @if (text) {
+            <p class="text">{{ text }}</p>
+        }
+    </div>
 </div>

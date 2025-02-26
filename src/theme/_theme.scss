@@ -18,14 +18,6 @@ $clr-surface-a30: #575757;
 $clr-surface-a40: #717171;
 $clr-surface-a50: #8b8b8b;
 
-/** Dark theme tonal surface colors */
-$clr-surface-tonal-a0: #251d17;
-$clr-surface-tonal-a10: #3a322c;
-$clr-surface-tonal-a20: #4f4843;
-$clr-surface-tonal-a30: #66605b;
-$clr-surface-tonal-a40: #7e7874;
-$clr-surface-tonal-a50: #96918e;
-
 /** Text */
 $clr-text-dark: $clr-dark-a0;
 $clr-text: $clr-light-a0;
@@ -60,4 +52,68 @@ $fs2: calc($fs * 2);
 .text-heading {
     @include Heading($fs2);
     color: $clr-light-a0;
+}
+
+.grid {
+    display: grid;
+    gap: $p $p1;
+}
+
+@mixin Box {
+    border-radius: $r;
+    padding: $p1;
+    background-color: $clr-surface-a10;
+}
+
+@mixin SectionButton {
+    display: flex;
+    align-items: center;
+    gap: $p;
+    padding: $p $p1 $p $p;
+    background-color: transparent;
+    border: 1px solid $clr-primary-a30;
+    color: $clr-text;
+    border-radius: $r;
+    cursor: pointer;
+
+    app-icon {
+        --size: 1.5rem;
+        --color: #f6b47a;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+@mixin Section {
+    @include Box();
+    display: flex;
+    flex-direction: column;
+    gap: $p1;
+
+    .section-title {
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-size: $fs1;
+        line-height: $fs1;
+    }
+
+    .row {
+        display: flex;
+        gap: $p1;
+    }
+
+    & > button,
+    .row > button {
+        @include SectionButton();
+    }
+}
+
+@mixin SectionInput {
+    border-radius: $r;
+    background-color: $clr-surface-a10;
+    border: 1px solid $clr-surface-a30;
+    padding: $p $p1;
+    color: $clr-text;
 }

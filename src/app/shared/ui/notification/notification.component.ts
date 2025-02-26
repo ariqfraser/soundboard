@@ -1,5 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { NotificationStatus } from '../../../services/notification/notification.types';
 
 @Component({
     selector: 'app-notification',
@@ -30,7 +31,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class NotificationComponent {
     title: string = '';
     text?: string;
-    actionText?: string;
+    status: NotificationStatus = 'success';
 
     @Output() dismiss = new EventEmitter<void>();
 

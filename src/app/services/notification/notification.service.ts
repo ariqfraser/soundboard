@@ -2,13 +2,7 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 import { NotificationComponent } from '../../shared/ui/notification/notification.component';
-
-interface NotificationData {
-    title: string;
-    text: string;
-    actionText?: string;
-    life?: number;
-}
+import { NotificationData, NotificationStatus } from './notification.types';
 
 @Injectable({
     providedIn: 'root',
@@ -19,7 +13,7 @@ export class NotificationService {
 
     constructor(private overlay: Overlay) {}
 
-    add(title: string, text: string, actionText?: string, life = 2000) {
+    show(title: string, text: string, status: NotificationStatus = 'success', life = 4000) {
         const positionStrategy = this.overlay
             .position()
             .global()
@@ -33,7 +27,7 @@ export class NotificationService {
         const overlayRef = this.overlay.create(overlayConfig);
 
         // Store the notification data with its overlay reference
-        const data: NotificationData = { title, text, actionText, life };
+        const data: NotificationData = { title, text, life };
         this.notifications.set(overlayRef, data);
 
         // Create a portal and attach it to the overlay
@@ -42,7 +36,7 @@ export class NotificationService {
         const instance = componentRef.instance;
         instance.title = title;
         instance.text = text;
-        instance.actionText = actionText;
+        instance.status = status;
 
         // auto-dissmiss then wait for animation finish b4 dismiss
         if (life > 0) {
