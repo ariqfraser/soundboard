@@ -1,0 +1,19 @@
+@use "theme" as *;
+
+.container {
+    background-color: rgb(129, 231, 144);
+    padding: $p1;
+    border-radius: $r;
+    user-select: none;
+    cursor: pointer;
+}
+
+.title {
+    font-size: $s1;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.action {
+    text-align: center;
+}

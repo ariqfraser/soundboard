@@ -12,7 +12,6 @@ export class ExplorerService {
 
     async read(path: string) {
         if (!this.electron.isElectron) {
-            console.log('isElectron:', this.electron.isElectron);
             this.directory.set(MockData);
             return;
         }

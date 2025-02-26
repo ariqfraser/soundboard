@@ -5,6 +5,7 @@ import {
     DownloadProgressAPIRes,
     DownloadStartedAPIRes,
 } from './electron-api.types';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable({
     providedIn: 'root',
@@ -19,11 +20,16 @@ export class ElectronApiService {
     private _downloadCompleted$ = new Subject<DownloadCompletedAPIRes>();
     downloadCompleted$ = this._downloadCompleted$.asObservable();
 
-    constructor() {
+    constructor(private notification: NotificationService) {
         if (this.isElectron) {
             window.electronAPI.onDownloadStarted((data) => {
                 console.log('download-started', data);
                 this._downloadStarted$.next(data);
+                this.notification.add(
+                    'Download Started!' + data.videoID,
+                    '',
+                    'click for more info',
+                );
             });
 
             window.electronAPI.onDownloadProgress((data) => {
