@@ -12,7 +12,7 @@ declare global {
     }
 }
 
-export interface IPCResponse<T> {
+interface IPCResponse<T> {
     success: boolean;
     data?: T;
     error?: {

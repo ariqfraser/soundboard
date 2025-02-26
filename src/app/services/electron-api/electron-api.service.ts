@@ -20,20 +20,22 @@ export class ElectronApiService {
     downloadCompleted$ = this._downloadCompleted$.asObservable();
 
     constructor() {
-        window.electronAPI.onDownloadStarted((data) => {
-            console.log('download-started', data);
-            this._downloadStarted$.next(data);
-        });
+        if (this.isElectron) {
+            window.electronAPI.onDownloadStarted((data) => {
+                console.log('download-started', data);
+                this._downloadStarted$.next(data);
+            });
 
-        window.electronAPI.onDownloadProgress((data) => {
-            console.log('download-progress', data);
-            this._downloadProgress$.next(data);
-        });
+            window.electronAPI.onDownloadProgress((data) => {
+                console.log('download-progress', data);
+                this._downloadProgress$.next(data);
+            });
 
-        window.electronAPI.onDownloadCompleted((data) => {
-            console.log('download-completed', data);
-            this._downloadCompleted$.next(data);
-        });
+            window.electronAPI.onDownloadCompleted((data) => {
+                console.log('download-completed', data);
+                this._downloadCompleted$.next(data);
+            });
+        }
     }
 
     get isElectron(): boolean {
