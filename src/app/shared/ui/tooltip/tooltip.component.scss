@@ -1,0 +1,9 @@
+@use "theme" as *;
+
+.container {
+    padding: $p $p1;
+    border: 1px solid $clr-surface-a30;
+    border-radius: $r;
+    color: $clr-text;
+    background-color: $clr-surface-a10;
+}

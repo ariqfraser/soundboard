@@ -20,3 +20,16 @@
         </button>
     </div>
 </div>
+
+<div class="section">
+    <p class="section-title">Tooltips</p>
+
+    <div class="column inputs">
+        <label for="tooltipText">Text</label>
+        <input #tooltipText type="text" id="tooltipText" value="Some tooltip text here." />
+    </div>
+
+    <div class="row">
+        <button [appTooltip]="tooltipText.value"><app-icon>verified</app-icon>Hover over me</button>
+    </div>
+</div>

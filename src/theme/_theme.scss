@@ -104,8 +104,15 @@ $fs2: calc($fs * 2);
         gap: $p1;
     }
 
+    .column {
+        display: flex;
+        flex-direction: column;
+        gap: $p1;
+    }
+
     & > button,
-    .row > button {
+    .row > button,
+    .column > button {
         @include SectionButton();
     }
 }

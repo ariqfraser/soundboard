@@ -1,22 +1,37 @@
 @use "theme" as *;
 
+:host {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $p1;
+}
+
+h1 {
+    grid-column: span 2;
+}
+
 .section {
     @include Section();
+}
+
+label {
+    text-transform: capitalize;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1rem;
+}
+
+input {
+    @include SectionInput();
 }
 
 .grid {
     &.notifications {
         grid-template-columns: repeat(2, 1fr);
         gap: $p $p1;
-        label {
-            text-transform: capitalize;
-            font-weight: bold;
-            letter-spacing: 1px;
-            line-height: 1rem;
-        }
-
-        input {
-            @include SectionInput();
-        }
     }
+}
+
+.inputs {
+    gap: $p !important;
 }
