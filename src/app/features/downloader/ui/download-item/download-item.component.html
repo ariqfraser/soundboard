@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="header">
+        <span class="time">{{ item().startTime | date: "short" }}</span>
+        <span class="video">{{ item().videoID }}</span>
+    </div>
+    <p class="name">{{ item().fileName }}</p>
+    <span class="status" [class]="item().status"
+        >{{ item().status }}
+        <span
+            [ngClass]="{
+                warn: item().status !== 'downloading',
+                success: item().status === 'completed',
+            }"
+            >{{ item().progress }}%</span
+        ></span
+    >
+</div>

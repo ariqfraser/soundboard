@@ -27,14 +27,12 @@ input {
     padding: $p1;
     background-color: $clr-surface-a10;
     border-radius: $r;
-
-    &.flex {
-        display: flex;
-        gap: $p1;
-        align-items: center;
-    }
 }
-
+.flex {
+    display: flex;
+    gap: $p1;
+    align-items: center;
+}
 .video {
     width: 500px;
     aspect-ratio: 16/9;
@@ -51,7 +49,6 @@ input {
 }
 
 .result-wrapper {
-    margin-top: $p1;
     display: flex;
     gap: $p;
 }
@@ -72,4 +69,21 @@ input {
         --size: 2rem;
         --wght: 500;
     }
+}
+
+.download-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: min-content;
+    gap: $p1;
+}
+
+.m {
+    margin-top: $p1;
+}
+
+.history-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $p;
 }

@@ -1,0 +1,56 @@
+@use "theme" as *;
+
+// TODO: CLEANUP
+.container {
+    background-color: $clr-surface-a0;
+    border-radius: $r;
+    border: 1px solid $clr-surface-a30;
+    padding: $p $p1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $p;
+    justify-content: space-between;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.time,
+.video {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.video {
+    color: $clr-surface-a50;
+}
+
+.time {
+    color: $clr-primary-a30;
+}
+
+.name {
+    font-size: $fs1;
+    line-height: $fs1;
+    font-weight: bold;
+    letter-spacing: 1px;
+    word-break: keep-all;
+}
+
+.status {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $clr-surface-a50;
+}
+.error {
+    color: $clr-error;
+}
+.warn {
+    color: $clr-warn;
+}
+.success {
+    color: $clr-success;
+}

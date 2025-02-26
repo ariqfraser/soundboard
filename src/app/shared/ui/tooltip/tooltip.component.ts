@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-tooltip',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
     styleUrl: './tooltip.component.scss',
 })
 export class TooltipComponent {
-    text: string = '';
+    text: string | string[] = '';
 }

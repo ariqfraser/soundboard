@@ -9,6 +9,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
     close: () => ipcRenderer.invoke("close"),
     heartbeat: () => true,
     downloadVideo: (id) => ipcRenderer.invoke("download-video", id),
+    downloadPlaylist: (id) => ipcRenderer.invoke("download-playlist", id),
     /**
      * listeners
      */

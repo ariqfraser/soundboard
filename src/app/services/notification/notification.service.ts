@@ -26,11 +26,11 @@ export class NotificationService {
         };
         const overlayRef = this.overlay.create(overlayConfig);
 
-        // Store the notification data with its overlay reference
+        // Store the notification data
         const data: NotificationData = { title, text, life };
         this.notifications.set(overlayRef, data);
 
-        // Create a portal and attach it to the overlay
+        // Create a portal
         const componentPortal = new ComponentPortal(NotificationComponent);
         const componentRef = overlayRef.attach(componentPortal);
         const instance = componentRef.instance;

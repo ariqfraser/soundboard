@@ -12,7 +12,7 @@ declare global {
     }
 }
 
-interface IPCResponse<T> {
+export interface IPCResponse<T> {
     success: boolean;
     data?: T;
     error?: {
@@ -36,9 +36,11 @@ export interface DownloadStartedAPIRes extends DownloadAPIRes {
 
 export interface DownloadProgressAPIRes extends DownloadAPIRes {
     progress: number;
+    fileName: string;
 }
 
 export interface DownloadCompletedAPIRes extends DownloadStartedAPIRes {
     duration: number;
     output: string[];
+    fileName: string;
 }

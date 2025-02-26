@@ -1,6 +1,6 @@
 <h1 class="text-subheading">downloader</h1>
-<p class="text-heading">setup</p>
-
+<!-- <p class="text-heading">setup</p> -->
+<!-- 
 <div class="settings container">
     <span class="step">
         1. Download yt-dlp and place it in the same folder as your sources root.</span
@@ -13,32 +13,57 @@
     >
     <label for="">YoutubeAPI Key</label>
     <input type="password" />
-</div>
+</div> -->
 
 <p class="text-heading">Search</p>
 
-<div class="container flex">
-    <label for="">Enter a video URL</label>
-    <input #inputURL type="text" (keyup)="onURLChange(inputURL.value)" />
+<div class="download-section">
+    <div class="container">
+        <div class="flex">
+            <label for="">Enter a video URL</label>
+            <input #inputURL type="text" (keyup)="onURLChange(inputURL.value)" />
+        </div>
+    </div>
+
+    <div class="result-wrapper">
+        @if (!this.videoID()) {
+            <div class="video video-placeholder">
+                <app-icon>movie</app-icon>
+            </div>
+        } @else {
+            <iframe
+                class="video"
+                [src]="embedSrc()"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+        }
+
+        <button class="button" [disabled]="!videoID()" (click)="download()">
+            <app-icon>download</app-icon>
+        </button>
+    </div>
 </div>
 
-<div class="result-wrapper">
-    @if (!this.videoID()) {
-        <div class="video video-placeholder">
-            <app-icon>movie</app-icon>
-        </div>
-    } @else {
-        <iframe
-            class="video"
-            [src]="embedSrc()"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen></iframe>
-    }
+<p class="text-subheading m">History</p>
 
-    <button class="button" [disabled]="!videoID()" (click)="download()">
-        <app-icon>download</app-icon>
-    </button>
+<div class="history-section">
+    @for (item of history$ | async; track item.downloadID) {
+        <app-download-item
+            [item]="item"
+            (click)="openDownloadDetails(item)"
+            #trigger="cdkOverlayOrigin"
+            cdkOverlayOrigin></app-download-item>
+        <ng-template
+            cdkConnectedOverlay
+            [cdkConnectedOverlayOrigin]="trigger"
+            [cdkConnectedOverlayOpen]="detailsIsOpen"
+            (detach)="detailsIsOpen = false">
+            <div class="detail-container">
+                {{ details().output }}
+            </div>
+        </ng-template>
+    }
 </div>

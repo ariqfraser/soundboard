@@ -24,6 +24,10 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+    if (!fs.existsSync(ROOT_DIR)) {
+        fs.mkdirSync(ROOT_DIR, { recursive: true });
+    }
+
     createWindow();
 });
 
@@ -66,7 +70,67 @@ ipcMain.handle("close", () => {
 
 const activeDownloads = new Map();
 
-ipcMain.handle("download-video", async (event, videoID) => {
+ipcMain.handle("download-playlist", async (_, playlistID) => {
+    try {
+        if (!playlistID.trim()) {
+            return {
+                success: false,
+                error: {
+                    message: "No playlistID",
+                    code: 400,
+                },
+            };
+        }
+
+        const downloadDir = path.join(ROOT_DIR, "downloads");
+        if (!fs.existsSync(downloadDir)) {
+            fs.mkdirSync(downloadDir, { recursive: true });
+        }
+
+        const args = [
+            "--no-keep-fragments",
+            "--no-write-thumbnail",
+            "-x",
+            "--audio-format",
+            "mp3",
+            "--audio-quality",
+            "0",
+            "--no-keep-video",
+            "--no-continue",
+            "-P",
+            downloadDir,
+            "-o",
+            "%(title)s [%(id)s]",
+            playlistID,
+        ];
+
+        const process = spawnYTDLP(args);
+
+        downloadProcess.stdout.on("data", (data) => {
+            const output = data.toString();
+
+            activeDownloads.get(downloadID).output.push(output);
+            // console.log(activeDownloads.get(downloadID));
+
+            const progressMatch = output.match(/([0-9.]+)%/);
+
+            if (progressMatch) {
+                const progress = parseFloat(progressMatch[1]);
+                activeDownloads.get(downloadID).progress = progress;
+
+                win.webContents.send("download-progress", {
+                    downloadID,
+                    progress,
+                    status: "downloading",
+                });
+            }
+        });
+    } catch (error) {
+        return generateErrorResponse(error);
+    }
+});
+
+ipcMain.handle("download-video", async (_, videoID) => {
     try {
         if (!videoID.trim()) {
             return {
@@ -97,13 +161,13 @@ ipcMain.handle("download-video", async (event, videoID) => {
             "-P",
             downloadDir,
             "-o",
-            "%(title)s [%(id)s]",
+            // "%(title)s [%(id)s]",
+            "%(title)s",
             `https://www.youtube.com/watch?v=${videoID}`,
         ];
         console.log(args.join(" "));
 
-        const YT_DLP_PATH = path.join(ROOT_DIR, "yt-dlp.exe");
-        const downloadProcess = spawn(YT_DLP_PATH, args);
+        const downloadProcess = spawnYTDLP(args);
 
         const startTime = Date.now();
         const downloadID = `${videoID}_${startTime}`;
@@ -115,6 +179,7 @@ ipcMain.handle("download-video", async (event, videoID) => {
             progress: 0,
             startTime,
             output: [],
+            fileName: "unknown",
         });
         win.webContents.send("download-started", {
             downloadID,
@@ -129,9 +194,13 @@ ipcMain.handle("download-video", async (event, videoID) => {
 
             activeDownloads.get(downloadID).output.push(output);
             // console.log(activeDownloads.get(downloadID));
+            const fileNameMatch = output.match(/Destination.+(C:.+)/);
+            if (fileNameMatch) {
+                const fileName = fileNameMatch[1].replace(downloadDir + "\\", "").replace("\n", "");
+                activeDownloads.get(downloadID).fileName = fileName;
+            }
 
             const progressMatch = output.match(/([0-9.]+)%/);
-
             if (progressMatch) {
                 const progress = parseFloat(progressMatch[1]);
                 activeDownloads.get(downloadID).progress = progress;
@@ -140,6 +209,7 @@ ipcMain.handle("download-video", async (event, videoID) => {
                     downloadID,
                     progress,
                     status: "downloading",
+                    fileName: activeDownloads.get(downloadID).fileName,
                 });
             }
         });
@@ -159,6 +229,8 @@ ipcMain.handle("download-video", async (event, videoID) => {
                         duration: Date.now() - downloadData.startTime,
                         startTime: downloadData.startTime,
                         output: downloadData.output,
+                        fileName: downloadData.fileName,
+                        progress: downloadData.progress,
                     });
 
                     res({ success: true, data: { downloadID, status: "completed" } });
@@ -190,12 +262,21 @@ ipcMain.handle("download-video", async (event, videoID) => {
             });
         });
     } catch (e) {
-        return {
-            success: false,
-            error: {
-                message: e.message,
-                code: e.code,
-            },
-        };
+        return generateErrorResponse(e);
     }
 });
+
+function generateErrorResponse(e) {
+    return {
+        success: false,
+        error: {
+            message: e.message,
+            code: e.code,
+        },
+    };
+}
+
+function spawnYTDLP(args) {
+    const YT_DLP_PATH = path.join(ROOT_DIR, "yt-dlp.exe");
+    return spawn(YT_DLP_PATH, args);
+}

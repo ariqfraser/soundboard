@@ -1,3 +1,9 @@
 <div class="container">
-    {{ text }}
+    @if (typeof text === "string") {
+        {{ text }}
+    } @else {
+        @for (line of text; track $index) {
+            <p>{{ line }}&nbsp;</p>
+        }
+    }
 </div>

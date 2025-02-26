@@ -7,7 +7,7 @@ import { TooltipComponent } from '../ui/tooltip/tooltip.component';
     selector: '[appTooltip]',
 })
 export class TooltipDirective {
-    appTooltip = input.required<string>();
+    appTooltip = input.required<string | string[]>();
 
     private overlayRef?: OverlayRef;
 
